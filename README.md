@@ -5,10 +5,10 @@ Study & Practice OpenCV by myself
 <hr>
 
 > **Reference Book** : OpenCV 4로 배우는 컴퓨터 비전과 머신러닝 (황선규, 길벗출판사)  
-> **Book Link** : https://www.gilbut.co.kr/book/view?bookcode=BN002402
-> **Author Blog** : https://sunkyoo.github.io/opencv4cvml/
-> **Reference Code(C++)** : https://github.com/gilbutITbook/006939
-> **Reference Code(Python)** : https://github.com/sunkyoo/opencv4cvml/tree/master/python
+> **Book Link** : https://www.gilbut.co.kr/book/view?bookcode=BN002402  
+> **Author Blog** : https://sunkyoo.github.io/opencv4cvml/  
+> **Reference Code(C++)** : https://github.com/gilbutITbook/006939  
+> **Reference Code(Python)** : https://github.com/sunkyoo/opencv4cvml/tree/master/python  
 
 <hr>
 
