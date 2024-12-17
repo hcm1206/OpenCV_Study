@@ -66,6 +66,46 @@ Mat::data는 행렬의 원소 데이터가 저장되어 있는 메모리 공간을 가리키는 포인터형 �
 Mat 클래스의 모든 맴버 변수는 public 접근 지시자로 선언되어 있어서 클래스 외부에서 직접 접근할 수 있음
 */
 
+/////////////////////////////////////////////////////// (3-7)
+
+// 아래 함수는 Mat 행렬 생성 및 값 초기화만 수행하고 기타 아무런 동작을 하지 않음
+
+void MatOp1() {
+
+	// 비어 있는 행렬을 생성하는 Mat 기본 생성자 
+	cv::Mat img1;	// empty matrix
+
+	// 메모리 공간을 할당하여 행렬을 생성하는 Mat 생성자
+	cv::Mat img2(480, 640, CV_8UC1);			// unsigned char, 1-channel
+	cv::Mat img3(480, 640, CV_8UC3);			// unsigned char, 3-channels
+	cv::Mat img4(Size(640, 480), CV_8UC3);		// Size(width, height)
+
+	// 메모리 공간을 할당하고 초기화한 값이 저장된 행렬을 생성하는 Mat 생성자
+	cv::Mat img5(480, 640, CV_8UC1, cv::Scalar(128));			// initial values, 128
+	cv::Mat img6(480, 640, CV_8UC3, cv::Scalar(0, 0, 255));		// initial values, red
+
+	// 메모리 공간을 할당하고 특정 값으로 초기화된 행렬을 생성하는 Mat 생성 함수
+	cv::Mat mat1 = cv::Mat::zeros(3, 3, CV_32SC1);		// 0's matrix
+	cv::Mat mat2 = cv::Mat::ones(3, 3, CV_32FC1);		// 1's matrix
+	cv::Mat mat3 = cv::Mat::eye(3, 3, CV_32FC1);		// identify matrix
+
+	// 이미 생성된 외부 메모리 값을 이용하여 행렬을 생성하는 Mat 생성자
+	float data[] = { 1, 2, 3, 4, 5, 6 };
+	cv::Mat mat4(2, 3, CV_32FC1, data);
+
+	// C++ 초기화 리스트(initializer list) 문법을 이용하여 행렬 값 초기화
+	cv::Mat mat5 = (cv::Mat_<float>(2, 3) << 1, 2, 3, 4, 5, 6);
+	cv::Mat mat6 = cv::Mat_<uchar>({ 2, 3 }, { 1, 2, 3, 4, 5, 6 });
+
+	// 기존 Mat 객체에 새로운 행렬을 저장하는 Mat::create() 메소드
+	mat4.create(256, 256, CV_8UC3); // uchar, 3-channels
+	mat5.create(4, 4, CV_32FC1); // float, 1-channel
+
+	// = 연산자 재정의 및 Mat 객체 메소드를 이용하여 행렬 전체 원소 값을 한꺼번에 지정
+	mat4 = cv::Scalar(255, 0, 0); 
+	mat5.setTo(1.f);
+}
+
 int main() {
 
 	return 0;
