@@ -163,6 +163,60 @@ void MatOp3() {
 	cv::destroyAllWindows();
 }
 
+/////////////////////////////////////////////////////// (3-10)
+
+void MatOp4() {
+
+	// 4 × 3 크기의 0으로 이루어진 CV_8UC1 타입의 mat1 행렬 생성
+	cv::Mat mat1 = cv::Mat::zeros(3, 4, CV_8UC1);
+
+	// mat1 행렬의 모든 픽셀을 Mat::at() 함수를 통해 순회하며 1씩 증가
+	for (int j = 0; j < mat1.rows; j++) {
+		for (int i = 0; i < mat1.cols; i++) {
+			mat1.at<uchar>(j, i)++;
+		}
+	}
+
+	// mat1 행렬의 모든 픽셀을 Mat::prt() 함수를 통해 순회하며 1씩 증가
+	for (int j = 0; j < mat1.rows; ++j) {
+		uchar* p = mat1.ptr<uchar>(j);
+		for (int i = 0; i < mat1.cols; ++i) {
+			p[i]++;
+		}
+	}
+
+	// mat1 행렬의 모든 픽셀을 MatIterator_ 반복자를 통해 순회하며 1씩 증가
+	for (cv::MatIterator_<uchar> it = mat1.begin<uchar>(); it != mat1.end<uchar>(); ++it) {
+		(*it)++;
+	}
+
+	// 3번의 순회를 통해 모든 픽셀값이 3으로 저장된 mat1 행렬 출력
+	cout << "mat1:\n" << mat1 << endl;
+}
+
+/////////////////////////////////////////////////////// (3-11)
+
+void MatOp5() {
+	// lenna.bmp 레나 영상을 불러와서 img1에 저장
+	cv::Mat img1 = imread("lenna.bmp");
+
+	// 레나 영상의 크기 및 채널 정보를 Mat 클래스 멤버 변수를 이용하여 출력
+	cout << "Width: " << img1.cols << endl;
+	cout << "Height: " << img1.rows << endl;
+	cout << "Channels: " << img1.channels() << endl;
+
+	// Mat 클래스의 type() 멤버 함수를 이용하여 img1 행렬 객체의 데이터 타입 출력
+	if (img1.type() == CV_8UC1)
+		cout << "img1 is a grayscale image." << endl;
+	else if (img1.type() == CV_8UC3)
+		cout << "img1 is a truecolor image." << endl;
+
+	// mat1 객체에 새로운 실수 행렬을 저장한 후 << 연산자를 이용하여 객체 원소 값 출력
+	float data[] = { 2.f, 1.414f, 3.f, 1.732f };
+	cv::Mat mat1(2, 2, CV_32FC1, data);
+	cout << "mat1:\n" << mat1 << endl;
+}
+
 int main() {
 
 	/////////////////////////////////////////////////////// (3-7)
@@ -170,6 +224,7 @@ int main() {
 	/*
 	아래 함수는 Mat 행렬 생성 및 값 초기화만 수행하고 기타 아무런 동작을 하지 않음
 	*/ 
+
 	MatOp1(); 
 
 	/////////////////////////////////////////////////////// (3-8)
@@ -195,6 +250,28 @@ int main() {
 	*/
 
 	MatOp3();
+
+	/////////////////////////////////////////////////////// (3-10)
+
+	/*
+	아래 함수는 모든 원소 값이 0으로 초기화된 CV_8UC1 타입의 행렬 mat1을 정의하고, 
+	Mat::at() 함수와 Mat::ptr() 함수, 그리고 MatIterator_ 반복자를 사용하여 모든 행렬 원소 값을 1씩 증가
+	*/
+
+	MatOp4();
+
+	/*
+	실행 결과 mat1 행렬의 모든 원소 값이 3으로 출력
+	*/
+
+	/////////////////////////////////////////////////////// (3-11)
+
+	/*
+	아래 함수는 lenna.bmp 파일에서 불러온 레나 영상의 크기, 채널 수, 타입 정보를 확인하여 화면에 출력
+	작은 크기의 행렬 정의 후 std::cout과 << 연산자를 이용하여 행렬의 모든 원소를 화면에 출력
+	*/
+
+	MatOp5();
 
 	return 0;
 }
