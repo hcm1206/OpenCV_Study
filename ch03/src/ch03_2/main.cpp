@@ -217,6 +217,57 @@ void MatOp5() {
 	cout << "mat1:\n" << mat1 << endl;
 }
 
+/////////////////////////////////////////////////////// (3-12)
+
+void MatOp6() {
+
+	// data 배열을 원소로 사용하는 2×2 크기의 행렬 mat1을 생성
+	float data[] = { 1, 1, 2, 3 };
+	cv::Mat mat1(2, 2, CV_32FC1, data);
+	cout << "mat1:\n" << mat1 << endl;
+
+	// mat1 행렬의 역행렬을 구하여 mat2에 저장
+	cv::Mat mat2 = mat1.inv();
+	cout << "mat2:\n" << mat2 << endl;
+
+	// mat1 행렬의 전치 행렬을 구하여 화면에 출력
+	cout << "mat1.t()\n" << mat1.t() << endl;
+	// 연산자 재정의를 이용하여 행렬의 산술 연산을 수행하고, 그 결과를 출력
+	cout << "mat1 + 3\n" << mat1 + 3 << endl;
+	cout << "mat1 + mat2:\n" << mat1 + mat2 << endl;
+	cout << "mat1 * mat2:\n" << mat1 * mat2 << endl;
+
+}
+
+/////////////////////////////////////////////////////// (3-13)
+
+void MatOp7() {
+	// lenna.bmp 파일을 불러와서 그레이스케일 영상으로 mat1에 저장
+	cv::Mat img1 = imread("lenna.bmp", IMREAD_GRAYSCALE);
+
+	// CV_8UC1(uchar) 타입 영상을 CV_32FC1(float) 타입 영상으로 변환한 행렬을 img1f에 저장
+	cv::Mat img1f;
+	img1.convertTo(img1f, CV_32FC1);
+
+	// 3×4 크기 mat1 행렬을 생성 후 1×12 크기의 행렬로 변경한 mat2 행렬 생성
+	uchar data1[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+	cv::Mat mat1(3, 4, CV_8UC1, data1);
+	cv::Mat mat2 = mat1.reshape(0, 1);
+
+	// mat1 행렬과 mat2 행렬 출력
+	cout << "mat1:\n" << mat1 << endl;
+	cout << "mat2:\n" << mat2 << endl;
+
+	// 1×4 크기의 255로 구성된 행렬 mat3을 생성 후 mat1 행렬의 마지막 행으로 mat3을 추가
+	cv::Mat mat3 = cv::Mat::ones(1, 4, CV_8UC1) * 255;
+	mat1.push_back(mat3);
+	cout << "mat1:\n" << mat1 << endl;
+
+	// mat1 행렬의 행을 6개로 늘리고 새로 추가된 행의 원소를 100으로 설정
+	mat1.resize(6, 100);
+	cout << "mat1:\n" << mat1 << endl;
+}
+
 int main() {
 
 	/////////////////////////////////////////////////////// (3-7)
@@ -272,6 +323,22 @@ int main() {
 	*/
 
 	MatOp5();
+
+	/////////////////////////////////////////////////////// (3-12)
+
+	/*
+	아래 함수는 행렬 하나를 정의하고 해당 행렬의 역행렬, 전치 행렬, 산술 연산을 수행
+	*/
+
+	MatOp6();
+
+	/////////////////////////////////////////////////////// (3-13)
+
+	/*
+	아래 함수는 행렬을 생성하여 타입 변환 및 크기 변환을 수행
+	*/
+
+	MatOp7();
 
 	return 0;
 }
