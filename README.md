@@ -14,18 +14,10 @@ Study & Practice OpenCV by myself
 
 ## Comment
 
-C++ or Python?  
-probably I'll use C++ this time,  
-using Python too much is boring  
-
 요즘 파이썬 너무 많이 써서 지겨우니  
 이번엔 C++을 써볼 예정  
 
 <hr>
-
-description about code will be written at code comment.  
-but if theorical content or additional description is needed,  
-I'll make some extra markdown file.  
 
 코드 설명은 대충 코드 주석으로 남길 예정  
 근데 이론적인 내용이나 부가 설명이 필요하면  
@@ -33,7 +25,6 @@ I'll make some extra markdown file.
 
 <hr>
 
-Why do I keep writing English explanations?  
-idk, who cares
-
-알 게 뭐야
+**25-03-04**  
+요즘 골치아픈 일도 몇 가지 해결했고  
+새 학기(6학년 1학기) 시즌 기념으로 중단했던 공부 다시 재개
