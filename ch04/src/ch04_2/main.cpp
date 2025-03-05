@@ -42,6 +42,39 @@ void drawLines() {
 
 }
 
+/////////////////////////////////////////////////////// (4-7)
+
+void drawPolys() {
+	Mat img(400, 400, CV_8UC3, Scalar(255, 255, 255));
+
+	// 사각형을 두께 2인 선으로 그림(빨간색)
+	rectangle(img, Rect(50, 50, 100, 50), Scalar(0, 0, 255), 2);
+	// 사각형 내부를 채워서 그림(갈색)
+	rectangle(img, Rect(50, 150, 100, 50), Scalar(0, 0, 128), -1);
+
+	// 반지름 30인 원을 내부를 채워서 그림(하늘색)
+	circle(img, Point(300, 120), 30, Scalar(255, 255, 0), -1, LINE_AA);
+	// 반지름 60인 원을 두께 3인 선으로 그림(파란색)
+	circle(img, Point(300, 120), 60, Scalar(255, 0, 0), 3, LINE_AA);
+
+	// 타원을 0°부터 270°까지 내부를 채워서 그림(하늘색)
+	ellipse(img, Point(120, 300), Size(60, 30), 20, 0, 270, Scalar(255, 255, 0), -1, LINE_AA);
+	// 타원을 두께 2인 선으로 그림(녹색)
+	ellipse(img, Point(120, 300), Size(100, 50), 20, 0, 360, Scalar(0, 255, 0), 2, LINE_AA);
+
+	// 계단 모양의 다각형을 두께 2인 선으로 그림(보라색)
+	vector<Point> pts;
+	pts.push_back(Point(250, 250)); pts.push_back(Point(300, 250));
+	pts.push_back(Point(300, 300)); pts.push_back(Point(350, 300));
+	pts.push_back(Point(350, 350)); pts.push_back(Point(250, 350));
+	polylines(img, pts, true, Scalar(255, 0, 255), 2);
+
+	imshow("img", img);
+	waitKey();
+
+	destroyAllWindows();
+}
+
 int main() {
 
 	/////////////////////////////////////////////////////// (4-6)
@@ -67,6 +100,29 @@ int main() {
 	맨 아래에 그려진 일곱 개의 도형은 drawMarker() 함수에 의해 그려진 마커
 	가장 왼쪽부터 차례대로 MARKER_CROSS, MARKER_TILTED_CROSS, MARKER_STAR, MARKER_DIAMOND, MARKER_SQUARE, MARKER_TRIANGLE_UP, MARKER_TRIANGLE_DOWN에 해당하는 마커 종류로 그린 결과
 	*/
+
+	/////////////////////////////////////////////////////// (4-7)
+
+	/*
+	흰색으로 초기화된 400 × 400 크기의 영상에 다양한 사각형, 원, 타원, 다각형을 그려서 화면에 출력하는 함수
+	*/
+
+	drawPolys();
+
+	/*
+	img창 좌측 상단에 그려진 두 개의 사각형은 첫 2개의 rectangle() 함수 실행 결과
+	빨간색 사각형은 두께를 2로 설정, 갈색 사각형은 두께를 -1로 설정하여 내부를 채움
+
+	img창 우측 상단에 그려진 두 개의 원은 그 다음 2개의 circle() 함수 실행 결과
+	두 원은 같은 중심 좌표를 가지고 있지만 하늘색 원은 반지름이 30이고 내부가 채워져 있고, 파란색 원은 반지름이 60이고 내부를 채우지 않고 선 두께가 3으로 설정됨
+
+	img창 좌측 하단에 그려진 타원과 호는 그 다음 2개의 ellipse() 함수 실행 결과
+	타원과 호는 같은 중심 좌표를 가지고 있지만 하늘색 호는 반지름이 60, 30이고 0°부터 270°까지 내부를 채운 호이고, 녹색 타원은 반지름이 120, 300이고 선 두께가 2로 설정되어 내부를 채우지 않은 타원
+
+	img창 우측 하단에 그려진 다각형은 마지막 polylines() 함수 실행 결과
+	꼭지점 좌표를 의미하는 Point 객체들을 저장한 vector 배열을 이용하여 계단 모양의 다각형을 그림
+	*/
+
 
 	return 0;
 }
