@@ -75,6 +75,55 @@ void drawPolys() {
 	destroyAllWindows();
 }
 
+/////////////////////////////////////////////////////// (4-8)
+
+void drawText() {
+	Mat img(500, 800, CV_8UC3, Scalar(255, 255, 255));
+
+	// 다양한 폰트를 이용하여 문자열 출력
+	putText(img, "FONT_HERSHEY_SIMPLEX", Point(20, 50), FONT_HERSHEY_SIMPLEX, 1, Scalar(0, 0, 255));
+	putText(img, "FONT_HERSHEY_PLAIN", Point(20, 100), FONT_HERSHEY_PLAIN, 1, Scalar(0, 0, 255));
+	putText(img, "FONT_HERSHEY_DUPLEX", Point(20, 150), FONT_HERSHEY_DUPLEX, 1, Scalar(0, 0, 255));
+	putText(img, "FONT_HERSHEY_COMPLEX", Point(20, 200), FONT_HERSHEY_COMPLEX, 1, Scalar(0, 0, 255));
+	putText(img, "FONT_HERSHEY_TRIPLEX", Point(20, 250), FONT_HERSHEY_TRIPLEX, 1, Scalar(0, 0, 255));
+	putText(img, "FONT_HERSHEY_COMPLEX_SMALL", Point(20, 300), FONT_HERSHEY_COMPLEX_SMALL, 1, Scalar(0, 0, 255));
+	putText(img, "FONT_HERSHEY_SCRIPT_SIMPLEX", Point(20, 350), FONT_HERSHEY_SCRIPT_SIMPLEX, 1, Scalar(0, 0, 255));
+	putText(img, "FONT_HERSHEY_SCRIPT_COMPLEX", Point(20, 400), FONT_HERSHEY_SCRIPT_COMPLEX, 1, Scalar(0, 0, 255));
+	// FONT_HERSHEY_COMPLEX 폰트와 FONT_ITALIC 상수를 함께 사용하여 이탤릭체로 문자열을 출력
+	putText(img, "FONT_HERSHEY_COMPLEX | FONT_ITALIC", Point(20, 450), FONT_HERSHEY_COMPLEX | FONT_ITALIC, 1, Scalar(0, 0, 255));
+
+	imshow("img", img);
+	waitKey();
+}
+
+/////////////////////////////////////////////////////// (4-9)
+
+void drawText2() {
+	Mat img(200, 640, CV_8UC3, Scalar(255, 255, 255));
+
+	// 출력할 문자열과 폰트 종류, 크기 비율, 선 두께 지정
+	const String text = "Hello, OpenCV";
+	int fontFace = FONT_HERSHEY_TRIPLEX;
+	double fontScale = 2.0;
+	int thickness = 1;
+
+	// 출력할 문자열이 차지할 사각형 영역의 크기를 구하여 sizeText 변수에 저장
+	Size sizeText = getTextSize(text, fontFace, fontScale, thickness, 0);
+	// 출력할 대상 영상 크기를 sizeImg 변수에 저장
+	Size sizeImg = img.size();
+
+	// sizeText와 sizeImg 크기 정보를 이용하여 문자열을 출력할 좌표를 계산
+	Point org((sizeImg.width - sizeText.width) / 2, (sizeImg.height + sizeText.height) / 2);
+	// 실제 문자열을 출력하고 문자열을 감싸는 사각형 영역을 그림
+	putText(img, text, org, fontFace, fontScale, Scalar(255, 0, 0), thickness);
+	rectangle(img, org, org + Point(sizeText.width, -sizeText.height), Scalar(255, 0, 0), 1);
+
+	imshow("img", img);
+	waitKey();
+
+	destroyAllWindows();
+}
+
 int main() {
 
 	/////////////////////////////////////////////////////// (4-6)
@@ -123,6 +172,31 @@ int main() {
 	꼭지점 좌표를 의미하는 Point 객체들을 저장한 vector 배열을 이용하여 계단 모양의 다각형을 그림
 	*/
 
+	/////////////////////////////////////////////////////// (4-8)
+
+	/*
+	800 × 500 크기의 흰색 영상에 다양한 폰트의 문자열을 출력하는 함수
+	*/
+
+	drawText();
+
+	/*
+	각 putText() 함수에 의해 출력되는 문자열에는 폰트 상수 이름을 지정하여 출력
+	*/
+
+	/////////////////////////////////////////////////////// (4-9)
+
+	/*
+	640 × 200 크기의 흰색 영상 정중앙에 "Hello, OpenCV" 문자열을 출력하는 함수
+	*/
+
+	drawText2();
+
+	/*
+	img.size() 코드를 이용하여 img 영상 크기를 sizeImg 변수에 저장
+	출력할 문자열이 차지할 영역의 크기는 getTextSize() 함수를 이용하여 sizeText 변수에 저장
+	위 두 가지 Size 변수값을 이용하여 문자열이 출력될 사각형 영역의 좌측 하단 좌표 계산 가능
+	*/
 
 	return 0;
 }
